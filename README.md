@@ -12,10 +12,12 @@ Repo for my masterthesis concerning individual-based models and the dynamic ener
 
 ## How to use the model
 
+By executing the whole code the model will be run as defined in the *Options* section (see below). The progress of the simulation is shown in the console. After the simulation has finished a graph is plotted and the results are saved as a csv file in your working directory.
+
+
+### Options:
 
 *Note: Main options can be set in the options section in the beginning of the code. For options, which can be activated or deactivated, use T (TRUE => on) or F (FALSE => off).*
-
-### Options to adjust the model:
 
 - **days:** number of days the population will be simulated
 
