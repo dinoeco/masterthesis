@@ -19,16 +19,11 @@ registerDoParallel(cl)
 # -------------------------------Options -------------------------------------------------
 ## Monte Carlo method
 # Number of Monte Carlo Simulations
-mc.no <- 6
-
-#### Parallel execution ####
-# matrix for results of each monte carlo simulation
-#mc.pop.size <- matrix(data = NA, nrow = days + 1, ncol = mc.no)
-#result <- foreach(m = 1:mc.no, .combine = 'cbind') %dopar% {
+mc.no <- 3
 
 
 # days to be simulated
-days      <- 365 * 5
+days      <- 365 * 3
 # Size of environment (dm^3)
 env.size  <- 30
 
@@ -38,9 +33,7 @@ env.size  <- 30
 temp.sc <- T
 # load temperature scenario
 temp.v <- read.csv("/Users/dino/Dropbox/Uni/Master/Masterarbeit/Daten/Temperatur/temp_mean_oct.csv", header = TRUE, sep = ";", dec = ".")$mean_temp
-temp.v <- rep(temp.v, c(max(1, days/365)))
-# increase daily temperature
-#temp.v <- temp.v + 2
+temp.v <- rep(temp.v, c(max(1, days/365))) # replicate data for each year to be simulated
 # set temperature (°C) for constant scenario
 temp <- 20
 
@@ -69,10 +62,6 @@ sd.start_3 <- 0.05    # standard deviation
 #sex.v <- rep(c('m','f'),  c(ceiling((no.start_1 + no.start_2 + no.start_3) / 2))) # 50:50 frequency
 #sex.v <- rep(c('m'), c(no.start_1 + no.start_2 + no.start_3)) # males or females only
 #sex.v <- sample(c('m', 'f'), c(no.start_1 + no.start_2 + no.start_3), replace = T) # random distribution
-# 1 m^2 field scenario
-#sex.v <- c(rep('f', 79), rep('m', 48), rep('f', 320), rep('m', 328), rep('f', 30), rep('m', 195)) # field scenario
-# 1/4 m^2 field scenario
-#sex.v <- c(rep('f', 20), rep('m', 12), rep('f', 80), rep('m', 82), rep('f', 8), rep('m', 48))
 # 1/10 m^2 field scenario
 sex.v <- c(rep('f', 8), rep('m', 5), rep('f', 32), rep('m', 32), rep('f', 3), rep('m', 20))
 
@@ -87,9 +76,6 @@ feed.med.days   <- 7
 #feed.sc <- rep(c(1000,1000,1000,1000,1000,1000,1000), trunc(days/7) + 1)
 #feed.sc <<- rep(234, days + 1) # same amount each day
 # read csv file with feeding data
-# 1/4 m^2
-#feed.sc <- read.csv("/Users/dino/Dropbox/Uni/Master/Masterarbeit/Recovery_scenario/food_scen_seasons.csv", header = FALSE, sep = ";", dec = ",")$V1
-# 1/10 m^2
 feed.sc <- read.csv("/Users/dino/Dropbox/Uni/Master/Masterarbeit/Recovery_scenario/food_scen_seasons_0.1qm.csv", header = FALSE, sep = ";", dec = ",")$V1
 feed.sc <- rep(trunc(feed.sc * 0.63), max(1, (days / 365)))
 # available food for Asellus
@@ -101,16 +87,20 @@ feed.sc <- feed.sc * 1.0
 ## Toxicity
 # include toxic effects (on/off)
 tox.on <- T
-# Use scenario (= T) or enter start and end days  (= F)
-tox.scn <- F
+
+# Choose how to create the toxic scenario 
+# 'd' = use temperature dependent DT50 for chlorpyrifos. Define start day and initial concentration. Only single exposure possible.
+# 'l' = load an external scenario as csv file
+# 's' = simplified scenario with start and end day and constant concentration in water
+tox.scn <- 'd'
 # Individual Tolerance (= 1) or Stochastic death (= 2)
-tox.opt <- 2
+tox.opt <- 1
 # Exposure Start (day)
 tox.t.start <- 213
 # Exposure End (day)
 tox.t.end <- 220
 # concentration of chlorpyrifos in water
-cw <- 0 # µg/L
+cw_ini <- 0.3 # µg/L
 # load scenario
 tox.sc <- read.csv("/Users/dino/Dropbox/Uni/Master/Masterarbeit/Recovery_scenario/recovery_tox_scenario_0.7_single_d120.csv", header = FALSE, sep = ";", dec = ".")$V1
 
@@ -173,19 +163,37 @@ s2 <- rep(l.start_2, no.start_2)
 s3 <- rep(l.start_3, no.start_3)
 l.start <- c(s1, s2, s3)
 
-# disable toxicity if water concentration = 0
-if(cw == 0){tox.on <- F}
 
-# vector for water concentration cw
-if ((tox.on == T) & (tox.scn == F)){
+# disable toxicity if selected water concentration = 0
+if(cw_ini == 0){tox.on <- F}
+
+# Create vector with water concentration of toxic substance based on selected options
+# simplified scenario
+if ((tox.on == T) & (tox.scn == 's')){
   cw_1 <- rep(0, tox.t.start)
-  cw_2 <- rep(cw, c(tox.t.end - tox.t.start + 1))
+  cw_2 <- rep(cw_ini, c(tox.t.end - tox.t.start + 1))
   cw_3 <- rep(0, days - tox.t.end)
   cw <- c(cw_1, cw_2, cw_3)
 }
-if ((tox.on == T) & (tox.scn == T)){
+
+# imported scenario
+if ((tox.on == T) & (tox.scn == 'l')){
   cw <- tox.sc  
 }
+
+# scenario considering DT50 of chlorpyrifos (also considers water temperature)
+if ((tox.on == T) & (tox.scn == 'd')){
+  cw <- c()
+  for (x in 1:(tox.t.start - 1)){
+    cw[x] <- 0
+  }
+  cw[tox.t.start] <- cw_ini
+  for (x in (tox.t.start + 1):(days + 1)){
+    cw[x] <- cw[x-1] * exp(-(log(2) / (38.367 * exp(-0.101 * temp.v[x - 1])) * 1))
+    if((cw[x] < 0.001) | (is.na(cw[x]) == T)) {cw[x] <- 0} # set cw to 0 if calculated value < 0.001
+  }
+}  
+
 
 # no. of steps for calculation of changes in smaller steps
 steps <- 100

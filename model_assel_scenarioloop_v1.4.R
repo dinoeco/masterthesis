@@ -12,15 +12,10 @@ library(doParallel)
 d_frame <- NULL
 
 ### Loop for all scenario combinations ###
-#for (food.loop in c(1.0, 0.8, 1.2)){
- # for(cw_ini.loop in c(0, 0.05, 0.135, 0.70)){
- #   for(tox.t.start.loop in c(213, 273, 343)){
-tox.t.start.loop <- 123
-for (food.loop in c(1.0)){
-  for(cw_ini.loop in c(0.135)){
-    #for(tox.t.start.loop in c(213, 273)){
-      
-      
+for (food.loop in c(1.0, 0.8, 1.2)){
+  for(cw_ini.loop in c(0, 0.05, 0.135, 0.70)){
+    for(tox.t.start.loop in c(213, 273, 343)){
+
       
 # set number of cores that should be used and create cluster
 #num_cores <- detectCores() - 2
@@ -47,8 +42,6 @@ temp.sc <- T
 # load temperature scenario
 temp.v <- read.csv("/Users/dino/Dropbox/Uni/Master/Masterarbeit/Daten/Temperatur/temp_mean_oct.csv", header = TRUE, sep = ";", dec = ".")$mean_temp
 temp.v <- rep(temp.v, c(max(1, days/365)))
-# increase daily temperature
-#temp.v <- temp.v + 2
 # set temperature (°C) for constant scenario
 temp <- 20
 
@@ -77,10 +70,6 @@ sd.start_3 <- 0.05    # standard deviation
 #sex.v <- rep(c('m','f'),  c(ceiling((no.start_1 + no.start_2 + no.start_3) / 2))) # 50:50 frequency
 #sex.v <- rep(c('m'), c(no.start_1 + no.start_2 + no.start_3)) # males or females only
 #sex.v <- sample(c('m', 'f'), c(no.start_1 + no.start_2 + no.start_3), replace = T) # random distribution
-# 1 m^2 field scenario
-#sex.v <- c(rep('f', 79), rep('m', 48), rep('f', 320), rep('m', 328), rep('f', 30), rep('m', 195)) # field scenario
-# 1/4 m^2 field scenario
-#sex.v <- c(rep('f', 20), rep('m', 12), rep('f', 80), rep('m', 82), rep('f', 8), rep('m', 48))
 # 1/10 m^2 field scenario
 sex.v <- c(rep('f', 8), rep('m', 5), rep('f', 32), rep('m', 32), rep('f', 3), rep('m', 20))
 
@@ -95,15 +84,12 @@ feed.med.days   <- 7
 #feed.sc <- rep(c(1000,1000,1000,1000,1000,1000,1000), trunc(days/7) + 1)
 #feed.sc <<- rep(234, days + 1) # same amount each day
 # read csv file with feeding data
-# 1/4 m^2
-#feed.sc <- read.csv("/Users/dino/Dropbox/Uni/Master/Masterarbeit/Recovery_scenario/food_scen_seasons.csv", header = FALSE, sep = ";", dec = ",")$V1
 # 1/10 m^2
 feed.sc <- read.csv("/Users/dino/Dropbox/Uni/Master/Masterarbeit/Recovery_scenario/food_scen_seasons_0.1qm.csv", header = FALSE, sep = ";", dec = ",")$V1
 feed.sc <- rep(trunc(feed.sc * 0.63), max(1, (days / 365)))
 # available food for Asellus
 feed.sc <- feed.sc * 0.3
 # adjust amount of food (scenarios)
-#feed.sc <- feed.sc * 1.2
 feed.sc <- feed.sc * food.loop
 
 
@@ -120,12 +106,10 @@ tox.scn <- 'd'
 tox.opt <- 1
 # Exposure Start (day)
 tox.t.start <- tox.t.start.loop
-#tox.t.start <- 213
 # Exposure End (day) (only needed for simplified scenario)
 tox.t.end <- 4
 # concentration of chlorpyrifos in water
 cw_ini <- cw_ini.loop # µg/L
-#cw_ini <- 0 # µg/L
 # load scenario
 #tox.sc <- read.csv("/Users/dino/Dropbox/Uni/Master/Masterarbeit/Recovery_scenario/recovery_tox_scenario_0.05_single_d120.csv", header = FALSE, sep = ";", dec = ".")$V1
 
@@ -189,7 +173,7 @@ s3 <- rep(l.start_3, no.start_3)
 l.start <- c(s1, s2, s3)
 
 # disable toxicity if selected water concentration = 0
-if(cw_ini.loop == 0){tox.on <- F}
+if(cw_ini == 0){tox.on <- F}
 
 # Create vector with water concentration of toxic substance based on selected options
 # simplified scenario
@@ -897,7 +881,7 @@ days <- nrow(mc.pop.size) - 1
 d_frame <- rbind(d_frame, cbind(as.data.frame(mc.median), food.loop, cw_ini.loop, tox.t.start.loop)) 
     }
   }
-#}
+}
 # add column names
 colnames(d_frame) <- c("day", "pop.size", "food", "cw_ini", "tox_start")
 # add column specifying treatment
@@ -906,13 +890,5 @@ d_frame$treat <- as.factor(paste(d_frame$food, d_frame$cw_ini, d_frame$tox_start
 
 # save data frame containing results from all scenarios (population size only)
 write.csv(d_frame, file = paste0(format(Sys.time(), "%Y-%m-%d_%H.%M"),"_d_frame", ".csv", sep = ""))
-
-
-
-
-
-
-
-
 
 
