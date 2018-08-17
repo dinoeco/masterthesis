@@ -1,13 +1,13 @@
 # masterthesis
-Repo for my masterthesis. An individual-based model based on the dynamic energy budget theory was implemented in R. All final R-scripts can be found in this repo.
+Repo for my masterthesis. An individual-based model based on the dynamic energy budget theory was implemented in R, simulating populations of *Asellus aquaticus*. All final R-scripts can be found in this repo.
 
 ## Description of material
 
  - *Asellus* model: *model_assel_v1.4.R*
- - *Asellus* model (parallelised code): *model_assel_v1.4_dopar.R*
+ - *Asellus* model with parallelised code: *model_assel_v1.4_dopar.R*
  - *Asellus* model for ecological scenarios: *model_assel_scenarioloop_v1.4.R*
  - shiny App of the *Asellus* model: *app.R*
- - R-Script for evaluation of recovery for ecological scenarios: *recovery_assessement.R*
+ - R-Script for evaluation of recovery of ecological scenarios: *recovery_assessement.R*
 
 
 ## How to use the model
