@@ -1,5 +1,5 @@
 # masterthesis
-Repo for my masterthesis concerning individual-based models and the dynamic energy budget theory, containing all R-code.
+Repo for my masterthesis. An individual-based model based on the dynamic energy budget theory was implemented in R. All final R-scripts can be found in this repo.
 
 ## Description of material
 
