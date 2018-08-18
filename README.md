@@ -7,9 +7,14 @@ Repo for my masterthesis. An individual-based model based on the dynamic energy 
  - *Asellus* model with parallelised code: *model_assel_v1.4_dopar.R*
  - *Asellus* model for ecological scenarios: *model_assel_scenarioloop_v1.4.R*
  - shiny App of the *Asellus* model: *app.R*
+ 
  - R-Script for evaluation of recovery of ecological scenarios: *recovery_assessement.R*
-
-
+ - Creation of graph comparing results of simulation model and population test: *poptest_eval.R*
+ - Evaluation of toxicity test (EC50, LC50, plots): *toxtest_eval.R*
+ - Evaluation of variation as a function of the number of Monte Carlo simulations (figure A6): *MC_variation.R*
+ - Determination of parameters for starvation: *starvation_paramteres.R*
+ - Calculation of Nash–Sutcliffe model efficiency coefficient: *NSE.R*
+ 
 ## How to use the model
 
 By executing the whole code the model will be run as defined in the *Options* section (see below). The progress of the simulation is shown in the console. After the simulation has finished three graphs, showing the population size, the available food, and the consumed food over time, are plotted and the results are saved as a csv file in your working directory.
