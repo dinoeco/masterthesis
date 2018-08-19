@@ -16,7 +16,7 @@ sim_quant <- apply(sim_results[,-1], 1, quantile, na.rm = TRUE)
 pdf(file="/Users/dino/Dropbox/Uni/Master/Masterarbeit/Plots/evaluation_poptest_comp.pdf")
 par(cex = 1.2)
 plot(c(0:(nrow(sim_results)-1)), sim_quant[5, ], type = "l", lty = 2, xlab = "time (d)", ylab = "population size (#)", 
-     ylim = c(0,max(sim_quant[5, ])), cex.axis = 1.2, cex.lab = 1.2) # max 100% quantil
+      ylim = c(0,max(test.data, sim_quant[5, ])), cex.axis = 1.2, cex.lab = 1.2) # max 100% quantil
 lines(c(0:(nrow(sim_results)-1)), sim_quant[1, ], type = "l", lty = 2) # min 0% quantil
 #lines(c(0:(nrow(sim_results)-1)), sim_quant[3, ], type = "l", lty = 1) # median
 lines(c(0:(nrow(sim_results)-1)), sim_mean, type = "l", lty = 1) # mean
