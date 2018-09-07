@@ -6,6 +6,7 @@ Repo for my masterthesis. An individual-based model based on the dynamic energy 
  - *Asellus* model: *model_assel_v1.4.R*
  - *Asellus* model with parallelised code: *model_assel_v1.4_dopar.R*
  - *Asellus* model for ecological scenarios: *model_assel_scenarioloop_v1.4.R*
+ - *Daphnia* model: *model_daphnia.R*
  - shiny App of the *Asellus* model: *app.R*
  
  - R-Script for evaluation of recovery of ecological scenarios: *recovery_assessement.R*
