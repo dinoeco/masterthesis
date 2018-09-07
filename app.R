@@ -23,7 +23,7 @@ ui <- fluidPage(
       tabsetPanel(
         tabPanel("Start",
                  br(),
-                 numericInput("days", label = "Days simulated", value = 0, min = 1, max = 200, step = 1, width = "50%"),
+                 numericInput("days", label = "Days simulated", value = 5, min = 1, max = 200, step = 1, width = "50%"),
                  numericInput("temp", label = "Temperature", value = 20, min = 1, max = 50, step = 1, width = "50%"),
                  br(),
                  h4("Monte Carlo Simulation"),
@@ -85,7 +85,7 @@ ui <- fluidPage(
       p("This is an interactive version of the model as described in my master thesis. Please note that this is a 
           supplemental online version with limited performance and functions. For full functionality use the regular 
           R-version, which is available for download",
-        a("here.", href = "https://www.dropbox.com/sh/ywdbrdjsxew9oyg/AAD_S6HCiWwtI93y2_lUpicka?dl=0")),
+        a("here.", href = "https://github.com/dinoeco/masterthesis")),
       br(),
       submitButton(),
       br(),

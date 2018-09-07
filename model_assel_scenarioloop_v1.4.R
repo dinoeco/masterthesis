@@ -13,7 +13,7 @@ d_frame <- NULL
 
 ### Loop for all scenario combinations ###
 for (food.loop in c(1.0, 0.8, 1.2)){
-  for(cw_ini.loop in c(0, 0.05, 0.135, 0.70)){
+  for(cw_ini.loop in c(0, 0.05, 0.135, 0.30, 0.70)){
     for(tox.t.start.loop in c(213, 273, 343)){
 
       
@@ -27,7 +27,7 @@ registerDoParallel(cl)
 # -------------------------------Options -------------------------------------------------
 ## Monte Carlo method
 # Number of Monte Carlo Simulations
-mc.no <- 6
+mc.no <- 50
 
 
 # days to be simulated
