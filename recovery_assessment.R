@@ -121,31 +121,6 @@ ggsave("/Users/dino/Dropbox/Uni/Master/Masterarbeit/Plots/recovery_times_plot.pn
 
 # colors in R: http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf
 
-# -------------------------------------- Effect size ------------------------------------------
-e_size <- c()
-for(i in 1:length(levels(d_frame$treat))) {  
-  e_size[i] <- 
-    
-
-    
-
-    
-    d_frame[d_frame$treat == levels(d_frame_sub$treat)[i],7]
-  
-  
-  rec_time3[i,1] <- which(temp_rec3[v1_d3[i]:length(temp_rec3)] >= rec_quot)[1]
-  rec_time3[i,2] <- levels(d_frame_sub$treat)[i]
-  
-  # replace 1 with 0  (recovery quotient always > 0.9 -> only slight or no effects)
-  if((rec_time3[i,1] == 1) & (is.na(rec_time3[i,1]) == FALSE)){
-    rec_time3[i,1] <- 0
-  }
-}     
-
-
-df_temp <- d_frame[d_frame$treat == levels(d_frame_sub$treat)[i],]
-ps_b <- df_temp[df_temp$tox_start[1] + 1, 2]
-ps_a <- df_temp[df_temp$tox_start[1] + 101, 2]
 
 
 
