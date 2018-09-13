@@ -1,14 +1,8 @@
 # Assessment of recovery and effect size 
 # from scenarios of the asellus model
 
-
 # -------------------------------------- Recovery ------------------------------------------
 # load d_frame file containing all results
-d_frame_1 <- read.csv("/Users/dino/Dropbox/Uni/Master/Masterarbeit/shared/Results/2018-08-13_18.18_d_frame.csv", header = TRUE, sep = ",", dec = ".")
-d_frame_2 <- read.csv("/Users/dino/Dropbox/Uni/Master/Masterarbeit/shared/Results/2018-08-14_21.22_d_frame.csv", header = TRUE, sep = ",", dec = ".")
-d_frame <- c()
-d_frame <- rbind(d_frame_1, d_frame_2)
-
 d_frame <- read.csv("/Users/dino/Dropbox/Uni/Master/Masterarbeit/shared/Results/2018-09-13_08.17_d_frame.csv", header = TRUE, sep = ",", dec = ".")
 d_frame <- d_frame[, -1]
 
@@ -21,9 +15,7 @@ d_frame <- d_frame[d_frame$treat != '1.2_0_273', ]
 d_frame <- d_frame[d_frame$treat != '1.2_0_343', ]
 
 d_frame <- subset(d_frame, cw_ini < 1)
-
 d_frame$treat <- factor(d_frame$treat)
-
 
 # plot all scenarios
 pdf(file="/Users/dino/Dropbox/Uni/Master/Masterarbeit/Plots/all_scenarios_plot_neu.pdf", width = 6, height = 9)
