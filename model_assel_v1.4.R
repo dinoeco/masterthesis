@@ -21,7 +21,7 @@ mc.no <- 3
 
 
 # days to be simulated
-days      <- 20 * 1
+days      <- 20
 # Size of environment (dm^3)
 env.size  <- 30      # 1 L Beaker -> d = 10 cm
 
@@ -72,7 +72,7 @@ feed.med.days   <- 7
 # feeeding scenario (amount of food in Joule)
 #feed.sc <- rep(c(50,0,0,50,0,0,0), trunc(days/7) + 1) # scenario for population experiment - 1 leaf disc = 16 J (Graca et al., 1993)
 #feed.sc <- rep(c(1000,1000,1000,1000,1000,1000,1000), trunc(days/7) + 1)
-feed.sc <- rep(100000000000, days + 1) # same amount each day
+feed.sc <- rep(100, days + 1) # same amount each day
 # read csv file with feeding data
 #feed.sc <- read.csv("/Users/dino/Dropbox/Uni/Master/Masterarbeit/food_scenario_0.5.csv", header = FALSE, sep = "", dec = ",")$V1
 # 1/10 m^2
@@ -335,11 +335,11 @@ for (m in 1:mc.no) {
   
   ### further life cycle of start individuals until desired length
   for (i in 1:length(l.start)) {
-     repeat {if (L[i] >= L.s[i] | L[i] > 0.28838) break else {
+    repeat {if (L[i] >= L.s[i] | L[i] > 0.28838) break else {
       ##  Growth, maturation, survival and reproduction for each individual
       # age (for debugging purposes only)
       age[i] <- age[i] + 1 
-       
+      
       ## growth
       dL[i] <- 0
       ## Reserve dynamics
@@ -410,7 +410,7 @@ for (m in 1:mc.no) {
         # set breeding back to false without releasing a brood
         if ((b.UH[i] >= ubh)) {
           breeding[i] <- F
-          }
+        }
       } # Reproduction if ((UH[i] >= uph) & (UR[i] > 0))
       
       
@@ -443,10 +443,10 @@ for (m in 1:mc.no) {
   
   
   ## adult females carrying new borns at test start (adjustment for laboratory test)
- # for (i in 16:20) {
+  # for (i in 16:20) {
   #  R[i] <- 15
   #}
-
+  
   
   #### Simulating each individual on every day t -----------------------------------------------------
   pop.count <- length(l.start) # population size (including dead ones) at first day - needed for loop i
@@ -538,7 +538,7 @@ for (m in 1:mc.no) {
       }
     } # for i
     
-  
+    
     ##  Growth, maturation, survival and reproduction for each individual
     for (i in 1:pop.count) {
       if (alive[i] == T) {
@@ -666,7 +666,7 @@ for (m in 1:mc.no) {
         # set alive to false if s <= rs
         if(s[i] <= rs[i]) {alive[i] <- F}
       } # if alive == T
-        
+      
       
       # keep all vectors at same length (poses problem if last entry of alive vector is false)
       if (alive[i] == F){
@@ -788,7 +788,7 @@ for (m in 1:mc.no) {
   mc.pop.size[, m] <- pop.size[, 2]
   mc.pop.feed[, m] <- pop.feed
   mc.env.food[, m] <- env.foodav[1:(days + 1)]
-   
+  
   
   # Progress Information
   if(mc.on == T){
@@ -856,11 +856,9 @@ if (mc.on == FALSE) {
 
 # -------------------------------- Profiling and Data Export ----------------------------------
 
-
-
 if (mc.on == T){mc.median <- cbind(c(0:days), mc.pop.quant[3, ])}
 if(mc.on == F){mc.median <- cbind(c(0:days), pop.size[, 2])}
- write.csv(mc.median[, c(1:2)], file = "median_temp.csv")
+write.csv(mc.median[, c(1:2)], file = "median_temp.csv")
 
 # auto file name (example: 2018-01-29_15.51_tox_simresults_13.48.csv)
 write.csv(mc.pop.size, file = paste0(format(Sys.time(), "%Y-%m-%d_%H.%M"),"_simresults_","MC=",mc.no,"_tox=0.135single_food=std_temp=std", "_popsize", ".csv", sep = ""))

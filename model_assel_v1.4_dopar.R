@@ -222,7 +222,7 @@ t_beta0 <- t_beta
 # matrix for results of each monte carlo simulation
 mc.pop.size <- matrix(data = NA, nrow = days + 1, ncol = mc.no)
 result <- foreach(m = 1:mc.no, .combine = 'cbind') %dopar% {
-
+  
   # Randomly chooses start sizes from a normal distribution inside one standard deviation
   l.rnorm <- c()
   # lengths for size class 1
@@ -358,11 +358,11 @@ result <- foreach(m = 1:mc.no, .combine = 'cbind') %dopar% {
   
   ### further life cycle of start individuals until desired length
   for (i in 1:length(l.start)) {
-     repeat {if (L[i] >= L.s[i] | L[i] > 0.28838) break else {
+    repeat {if (L[i] >= L.s[i] | L[i] > 0.28838) break else {
       ##  Growth, maturation, survival and reproduction for each individual
       # age (for debugging purposes only)
       age[i] <- age[i] + 1 
-       
+      
       ## growth
       dL[i] <- 0
       ## Reserve dynamics
@@ -433,7 +433,7 @@ result <- foreach(m = 1:mc.no, .combine = 'cbind') %dopar% {
         # set breeding back to false without releasing a brood
         if ((b.UH[i] >= ubh)) {
           breeding[i] <- F
-          }
+        }
       } # Reproduction if ((UH[i] >= uph) & (UR[i] > 0))
       
       
@@ -466,10 +466,10 @@ result <- foreach(m = 1:mc.no, .combine = 'cbind') %dopar% {
   
   
   ## adult females carrying new borns at test start (adjustment for laboratory test)
- # for (i in 16:20) {
+  # for (i in 16:20) {
   #  R[i] <- 15
- # }
-
+  # }
+  
   
   #### Simulating each individual on every day t -----------------------------------------------------
   pop.count <- length(l.start) # population size (including dead ones) at first day - needed for loop i
@@ -561,7 +561,7 @@ result <- foreach(m = 1:mc.no, .combine = 'cbind') %dopar% {
       }
     } # for i
     
-  
+    
     ##  Growth, maturation, survival and reproduction for each individual
     for (i in 1:pop.count) {
       if (alive[i] == T) {
@@ -689,7 +689,7 @@ result <- foreach(m = 1:mc.no, .combine = 'cbind') %dopar% {
         # set alive to false if s <= rs
         if(s[i] <= rs[i]) {alive[i] <- F}
       } # if alive == T
-        
+      
       
       # keep all vectors at same length (poses problem if last entry of alive vector is false)
       if (alive[i] == F){
@@ -801,9 +801,6 @@ result <- foreach(m = 1:mc.no, .combine = 'cbind') %dopar% {
     
     
   } # for t loop
-
-  #pop.size[,2]
-
   
   list(pop.size[,2], pop.feed, env.foodav[1:(days + 1)])
   
@@ -826,41 +823,41 @@ days <- nrow(mc.pop.size) - 1
 # ------------------------------ Results --------------------------------------------------
 ## Matrices and Plots with Monte Carlo
 
-  mc.pop.mean <- rowMeans(mc.pop.size, na.rm = TRUE)
-  mc.pop.min <- apply(mc.pop.size, 1, min, na.rm = TRUE)
-  mc.pop.max <- apply(mc.pop.size, 1, max, na.rm = TRUE)
-  mc.pop.quant <- apply(mc.pop.size, 1, quantile, na.rm = TRUE)
-  
-  mc.feed.mean <- rowMeans(mc.pop.feed, na.rm = TRUE)
-  mc.feed.min <- apply(mc.pop.feed, 1, min, na.rm = TRUE)
-  mc.feed.max <- apply(mc.pop.feed, 1, max, na.rm = TRUE)
-  mc.feed.quant <- apply(mc.pop.feed, 1, quantile, na.rm = TRUE)
-  
-  mc.food.mean <- rowMeans(mc.env.food, na.rm = TRUE)
-  mc.food.min <- apply(mc.env.food, 1, min, na.rm = TRUE)
-  mc.food.max <- apply(mc.env.food, 1, max, na.rm = TRUE)
-  mc.food.quant <- apply(mc.env.food, 1, quantile, na.rm = TRUE)
-  
-  # plot for population size
-  plot(c(0:days), mc.pop.quant[5, ], type = "l", lty = 2, xlab = "time (d)", ylab = "population size (#)", ylim = c(0,max(mc.pop.quant[5, ])), cex.axis = 1.2, cex.lab = 1.2) # max 100% quantil
-  lines(c(0:days), mc.pop.quant[1, ], type = "l", lty = 2) # min 0% quantil
-  lines(c(0:days), mc.pop.quant[3, ], type = "l", lty = 1) # median
-  #lines(c(0:days), mc.pop.quant[2, ], type = "l", lty = 3) # 25% quantil
-  #lines(c(0:days), mc.pop.quant[4, ], type = "l", lty = 3) # 75% quantil
-  
-  # plot for available food 
-  plot(c(0:days), mc.food.quant[5, ], type = "l", lty = 2, xlab = "time (d)", ylab = "available food (J)", ylim = c(0,max(mc.food.quant[5, ])), cex.axis = 1.2, cex.lab = 1.2) # max 100% quantil
-  lines(c(0:days), mc.food.quant[1, ], type = "l", lty = 2) # min 0% quantil
-  lines(c(0:days), mc.food.quant[3, ], type = "l", lty = 1) # median
-  
-  # plot for consumed food by population
-  plot(c(0:days), mc.feed.quant[5, ], type = "l", lty = 2, xlab = "time (d)", ylab = "food consumed by population (J)", ylim = c(0,max(mc.feed.quant[5, ])), cex.axis = 1.2, cex.lab = 1.2) # max 100% quantil
-  lines(c(0:days), mc.feed.quant[1, ], type = "l", lty = 2) # min 0% quantil
-  lines(c(0:days), mc.feed.quant[3, ], type = "l", lty = 1) # median
-  
+mc.pop.mean <- rowMeans(mc.pop.size, na.rm = TRUE)
+mc.pop.min <- apply(mc.pop.size, 1, min, na.rm = TRUE)
+mc.pop.max <- apply(mc.pop.size, 1, max, na.rm = TRUE)
+mc.pop.quant <- apply(mc.pop.size, 1, quantile, na.rm = TRUE)
+
+mc.feed.mean <- rowMeans(mc.pop.feed, na.rm = TRUE)
+mc.feed.min <- apply(mc.pop.feed, 1, min, na.rm = TRUE)
+mc.feed.max <- apply(mc.pop.feed, 1, max, na.rm = TRUE)
+mc.feed.quant <- apply(mc.pop.feed, 1, quantile, na.rm = TRUE)
+
+mc.food.mean <- rowMeans(mc.env.food, na.rm = TRUE)
+mc.food.min <- apply(mc.env.food, 1, min, na.rm = TRUE)
+mc.food.max <- apply(mc.env.food, 1, max, na.rm = TRUE)
+mc.food.quant <- apply(mc.env.food, 1, quantile, na.rm = TRUE)
+
+# plot for population size
+plot(c(0:days), mc.pop.quant[5, ], type = "l", lty = 2, xlab = "time (d)", ylab = "population size (#)", ylim = c(0,max(mc.pop.quant[5, ])), cex.axis = 1.2, cex.lab = 1.2) # max 100% quantil
+lines(c(0:days), mc.pop.quant[1, ], type = "l", lty = 2) # min 0% quantil
+lines(c(0:days), mc.pop.quant[3, ], type = "l", lty = 1) # median
+#lines(c(0:days), mc.pop.quant[2, ], type = "l", lty = 3) # 25% quantil
+#lines(c(0:days), mc.pop.quant[4, ], type = "l", lty = 3) # 75% quantil
+
+# plot for available food 
+plot(c(0:days), mc.food.quant[5, ], type = "l", lty = 2, xlab = "time (d)", ylab = "available food (J)", ylim = c(0,max(mc.food.quant[5, ])), cex.axis = 1.2, cex.lab = 1.2) # max 100% quantil
+lines(c(0:days), mc.food.quant[1, ], type = "l", lty = 2) # min 0% quantil
+lines(c(0:days), mc.food.quant[3, ], type = "l", lty = 1) # median
+
+# plot for consumed food by population
+plot(c(0:days), mc.feed.quant[5, ], type = "l", lty = 2, xlab = "time (d)", ylab = "food consumed by population (J)", ylim = c(0,max(mc.feed.quant[5, ])), cex.axis = 1.2, cex.lab = 1.2) # max 100% quantil
+lines(c(0:days), mc.feed.quant[1, ], type = "l", lty = 2) # min 0% quantil
+lines(c(0:days), mc.feed.quant[3, ], type = "l", lty = 1) # median
+
 # -------------------------------- Profiling and Data Export ----------------------------------
 
- mc.median <- cbind(c(0:days), mc.pop.quant[3, ])
+mc.median <- cbind(c(0:days), mc.pop.quant[3, ])
 # write.csv(mc.median[, c(1:2)], file = "median_temp.csv")
 # write.csv(mc.pop.size, file = "2018_01_29_tox_simresults_it_T5.csv")
 
