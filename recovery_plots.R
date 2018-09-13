@@ -5,7 +5,7 @@
 
 
 ### Plot Control pointing days of application and 1st of October
-sim_results <- read.csv("/Users/dino/Dropbox/Uni/Master/Masterarbeit/shared/Results/2018-08-24_21.05_simresults_MC=50_conc=0_peak=123_food=1_popsize.csv", header = TRUE, sep = ",", dec = ".")
+sim_results <- read.csv("/Users/dino/Dropbox/Uni/Master/Masterarbeit/shared/Results/2018-09-09_14.58_simresults_MC=50_conc=0_peak=213_food=1_popsize.csv", header = TRUE, sep = ",", dec = ".")
 # evaluation of simulated data
 sim_mean <- rowMeans(sim_results[,-1], na.rm = TRUE)
 sim_min <- apply(sim_results[,-1], 1, min, na.rm = TRUE)
@@ -31,7 +31,7 @@ par(cex = 1.0)
 
 
 ### Plot 1.2_0_213 (high food scenario control)
-sim_results <- read.csv("/Users/dino/Dropbox/Uni/Master/Masterarbeit/shared/Results/2018-08-13_08.24_simresults_MC=20_conc=0_peak=213_food=1.2_popsize.csv", header = TRUE, sep = ",", dec = ".")
+sim_results <- read.csv("/Users/dino/Dropbox/Uni/Master/Masterarbeit/shared/Results/2018-09-12_02.26_simresults_MC=50_conc=0_peak=213_food=1.2_popsize.csv", header = TRUE, sep = ",", dec = ".")
 # evaluation of simulated data
 sim_mean <- rowMeans(sim_results[,-1], na.rm = TRUE)
 sim_min <- apply(sim_results[,-1], 1, min, na.rm = TRUE)
@@ -49,7 +49,7 @@ lines(c(0:(nrow(sim_results)-1)), sim_mean, type = "l", lty = 1) # mean
 arrows(c(213,273,343), c(242,264,299), x1 = c(213,273,343), y1 = c(172, 194, 229), length = 0.20, angle = 30,
        code = 2, lwd = 2, lty = 1)
 # arrows pointing at 1st October
-arrows(c(0,365,365*2,365*3,365*4), c(50,160,130,130,110), x1 = c(0,365,365*2,365*3,365*4), y1 = c(90,200,180,180,160), length = 0.25, angle = 30,
+arrows(c(0,365,365*2,365*3,365*4), c(50,160,140,140,140), x1 = c(0,365,365*2,365*3,365*4), y1 = c(90,200,190,190,190), length = 0.25, angle = 30,
        code = 2, lwd = 2, lty = 3)
 text(1500, 350, "'high food'", cex = 1.2)
 dev.off()
@@ -57,7 +57,7 @@ par(cex = 1.0)
 
 
 ### Plot 0.8_0_213 (low food scenario control)
-sim_results <- read.csv("/Users/dino/Dropbox/Uni/Master/Masterarbeit/shared/Results/2018-08-12_23.06_simresults_MC=20_conc=0_peak=213_food=0.8_popsize.csv", header = TRUE, sep = ",", dec = ".")
+sim_results <- read.csv("/Users/dino/Dropbox/Uni/Master/Masterarbeit/shared/Results/2018-09-10_21.34_simresults_MC=50_conc=0_peak=213_food=0.8_popsize.csv", header = TRUE, sep = ",", dec = ".")
 # evaluation of simulated data
 sim_mean <- rowMeans(sim_results[,-1], na.rm = TRUE)
 sim_min <- apply(sim_results[,-1], 1, min, na.rm = TRUE)
@@ -82,11 +82,11 @@ dev.off()
 par(cex = 1.0)
 
 
-#### ---------------------- PLots for timing -------------------------------- ####
+#### ---------------------- Plots for timing -------------------------------- ####
 
 
-### Plot 1_0.7_213
-sim_results <- read.csv("/Users/dino/Dropbox/Uni/Master/Masterarbeit/shared/Results/2018-08-14_08.27_simresults_MC=20_conc=0.7_peak=213_food=1_popsize.csv", header = TRUE, sep = ",", dec = ".")
+### Plot 1_0.7_213 (spring)
+sim_results <- read.csv("/Users/dino/Dropbox/Uni/Master/Masterarbeit/shared/Results/2018-09-10_16.36_simresults_MC=50_conc=0.7_peak=213_food=1_popsize.csv", header = TRUE, sep = ",", dec = ".")
 # evaluation of simulated data
 sim_mean <- rowMeans(sim_results[,-1], na.rm = TRUE)
 sim_min <- apply(sim_results[,-1], 1, min, na.rm = TRUE)
@@ -111,8 +111,8 @@ dev.off()
 par(cex = 1.0)
 
 
-### Plot 1_0.7_273
-sim_results <- read.csv("/Users/dino/Dropbox/Uni/Master/Masterarbeit/shared/Results/2018-08-14_09.23_simresults_MC=20_conc=0.7_peak=273_food=1_popsize.csv", header = TRUE, sep = ",", dec = ".")
+### Plot 1_0.7_273 (summer)
+sim_results <- read.csv("/Users/dino/Dropbox/Uni/Master/Masterarbeit/shared/Results/2018-09-10_18.41_simresults_MC=50_conc=0.7_peak=273_food=1_popsize.csv", header = TRUE, sep = ",", dec = ".")
 # evaluation of simulated data
 sim_mean <- rowMeans(sim_results[,-1], na.rm = TRUE)
 sim_min <- apply(sim_results[,-1], 1, min, na.rm = TRUE)
@@ -137,8 +137,8 @@ dev.off()
 par(cex = 1.0)
 
 
-### Plot 1_0.7_343
-sim_results <- read.csv("/Users/dino/Dropbox/Uni/Master/Masterarbeit/shared/Results/2018-08-14_10.08_simresults_MC=20_conc=0.7_peak=343_food=1_popsize.csv", header = TRUE, sep = ",", dec = ".")
+### Plot 1_0.7_343 (autumn)
+sim_results <- read.csv("/Users/dino/Dropbox/Uni/Master/Masterarbeit/shared/Results/2018-09-10_20.27_simresults_MC=50_conc=0.7_peak=343_food=1_popsize.csv", header = TRUE, sep = ",", dec = ".")
 # evaluation of simulated data
 sim_mean <- rowMeans(sim_results[,-1], na.rm = TRUE)
 sim_min <- apply(sim_results[,-1], 1, min, na.rm = TRUE)
@@ -158,7 +158,7 @@ arrows(c(343), c(299), x1 = c(343), y1 = c(229), length = 0.20, angle = 30,
 # arrows pointing at 1st October
 #arrows(c(0,365,365*2,365*3,365*4), c(50,160,130,100,50), x1 = c(0,365,365*2,365*3,365*4), y1 = c(90,200,180,150,100), length = 0.25, angle = 30,
 #       code = 2, lwd = 2, lty = 3)
-text(1500, 350, "fall", cex = 1.2)
+text(1500, 350, "autumn", cex = 1.2)
 dev.off()
 par(cex = 1.0)
 
