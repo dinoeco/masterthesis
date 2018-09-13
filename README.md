@@ -9,7 +9,8 @@ Repo for my masterthesis. An individual-based model based on the dynamic energy 
  - *Daphnia* model: *model_daphnia.R*
  - shiny App of the *Asellus* model: *app.R*
  
- - R-Script for evaluation of recovery of ecological scenarios: *recovery_assessement.R*
+ - Evaluation of recovery of ecological scenarios: *recovery_assessement.R*
+ - Creating of graphs for population dynamics and recovery under realistic conditions: *recovery_assessment.R*
  - Creation of graph comparing results of simulation model and population test: *poptest_eval.R*
  - Evaluation of toxicity test (EC50, LC50, plots): *toxtest_eval.R*
  - Evaluation of variation as a function of the number of Monte Carlo simulations (figure A6): *MC_variation.R*
