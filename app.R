@@ -24,7 +24,7 @@ ui <- fluidPage(
         tabPanel("Start",
                  br(),
                  numericInput("days", label = "Days simulated", value = 5, min = 1, max = 200, step = 1, width = "50%"),
-                 numericInput("temp", label = "Temperature", value = 20, min = 1, max = 50, step = 1, width = "50%"),
+                 numericInput("temp", label = "Temperature [°C]", value = 20, min = 1, max = 50, step = 1, width = "50%"),
                  br(),
                  h4("Monte Carlo Simulation"),
                  checkboxInput("mc.on", label = "activate Monte Carlo", value = FALSE),
@@ -37,7 +37,7 @@ ui <- fluidPage(
         
         tabPanel("Feeding",
                  br(),
-                 numericInput("env.size", label = "Size of Environment (L)", value = 0.079, width = "50%"),
+                 numericInput("env.size", label = "Size of Environment [L]", value = 0.079, width = "50%"),
                  checkboxInput("feed.med.change", "Renew Medium", value = FALSE),
                  numericInput("feed.med.days", label = "Changing Interval (days)", value = 7, step = 1, width = "50%"),
                  
@@ -50,13 +50,13 @@ ui <- fluidPage(
         
         tabPanel("Initial Population",
                  br(),
-                 numericInput("l.start_1", label = "Size Class 1 (cm)", value = 0.7, min = 0.1, max = 100, step = 0.1, width = "50%"),
+                 numericInput("l.start_1", label = "Size Class 1 [cm]", value = 0.7, min = 0.1, max = 100, step = 0.1, width = "50%"),
                  numericInput("no.start_1", label = "Quantity", value = 30, min = 0, max = 100, step = 1, width = "50%"),
                  br(),
-                 numericInput("l.start_2", label = "Size Class 2 (cm)", value = 0.7, min = 0.1, max = 100, step = 0.1, width = "50%"),
+                 numericInput("l.start_2", label = "Size Class 2 [cm]", value = 0.7, min = 0.1, max = 100, step = 0.1, width = "50%"),
                  numericInput("no.start_2", label = "Quantity", value = 0, min = 0, max = 100, step = 1, width = "50%"),
                  br(),
-                 numericInput("l.start_3", label = "Size Class 3 (cm)", value = 0.5, min = 0.1, max = 100, step = 0.1, width = "50%"),
+                 numericInput("l.start_3", label = "Size Class 3 [cm]", value = 0.5, min = 0.1, max = 100, step = 0.1, width = "50%"),
                  numericInput("no.start_3", label = "Quantity", value = 0, min = 0, max = 100, step = 1, width = "50%"),
                  br(),
                  numericInput("start.size.sd", label = "SD for Size Classes", value = 0.06, step = 0.01, min = 0, width = "50%")
@@ -71,7 +71,7 @@ ui <- fluidPage(
   
                  # dynamic slider to fit the max value based on simulation days
                  uiOutput("tox.slider"),
-                 helpText("Click 'Apply Changes' after changing the simulation days to update slider range")
+                 helpText("Click 'Apply Changes' after changing the days of simulation to update slider range")
                  #numericInput("tox.t.start", label = "Exposure Start", min = 1, step = 1, value = 20, width = "50%"),
                  #numericInput("tox.t.end", label = "Exposure End", min = 1, step = 1, value = 24, width = "50%")
                  
@@ -259,9 +259,9 @@ server <- function(input, output, session) {
     # GUTS
     ke_sd   <- 0.0070211 * 24  # dominant rate constant for SD [h^-1]
     kk      <- 0.0105648 * 24  # h^-1 killig rate (SD)
-    z       <- 0.1856509       # µg/L  threshold for effect (SD)
+    z       <- 0.1856509       # ??g/L  threshold for effect (SD)
     ke_it   <- 1.46e-07 * 24   # dominant rate constant for IT [h^-1] 
-    t_alpha <- 5.71e-05        # µg/L median of threshold distribution (IT) 
+    t_alpha <- 5.71e-05        # ??g/L median of threshold distribution (IT) 
     t_beta  <- 2.34836595      # h^-1 shape parameter of threshold distribution (IT)
     L_par   <- 0.7             # physical body size of animals used in toxicity test for parameterisation (cm)
     
