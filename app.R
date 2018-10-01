@@ -5,10 +5,10 @@
 #### upload app ####
 #library(rsconnect)
 # adjust app path:
-#rsconnect::deployApp(appDir = '/Users/dino/Dropbox/Uni/Master/Masterarbeit/R_Masterarbeit/shiny_app_asselmodell/', appName = 'Asellus model')
+#rsconnect::deployApp(appDir = '/Users/dino/Dropbox/Uni/Master/Masterarbeit/R_Masterarbeit/shiny_app_asellusmodell', appName = 'Asellusmodel')
 
 
-#setwd("/Users/dino/Dropbox/Uni/Master/Masterarbeit/R_Masterarbeit/shiny_app_asselmodell")
+#setwd("/Users/dino/Dropbox/Uni/Master/Masterarbeit/R_Masterarbeit/shiny_app_asellusmodell")
 library(shiny)
 
 #### User Interface ####
