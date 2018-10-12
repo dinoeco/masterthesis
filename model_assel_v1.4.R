@@ -128,12 +128,12 @@ pAm_m   <- 75.4559     # Surface-area-specific maximum assimilation rate for mal
 px_max  <- kap_x       # maximum assimilation efficiency (-)
 
 # GUTS
-ke_sd   <- 0.0070211 * 24  # dominant rate constant for SD (h^-1 / d^-1)
-kk      <- 0.0105648 * 24  # killig rate for SD (h^-1 / d^-1)
+ke_sd   <- 0.0070211 * 24  # dominant rate constant for SD (h^-1 or d^-1)
+kk      <- 0.0105648 * 24  # killig rate for SD (h^-1 or d^-1)
 z       <- 0.1856509       # threshold for effect for SD (µg/L)
-ke_it   <- 1.46e-07 * 24   # dominant rate constant for IT (h^-1 / d^-1) 
+ke_it   <- 1.46e-07 * 24   # dominant rate constant for IT (h^-1 or d^-1) 
 t_alpha <- 5.71e-05        # median of threshold distribution for IT (µg/L)
-t_beta  <- 2.34836595      # shape parameter of threshold distribution for IT (h^-1 / d^-1)
+t_beta  <- 2.34836595      # shape parameter of threshold distribution for IT (h^-1 or d^-1)
 L_par   <- 0.7             # physical body size of animals used in toxicity test for parameterisation (cm)
 
 # Arrhenius temperature [K]
