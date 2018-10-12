@@ -66,7 +66,7 @@ tox.t.end <- 24
 # Individual Tolerance (= 1) or Stochastic death (= 2)
 tox.opt <- 1
 # concentration of substance in water
-cw <- 10 # ??g/L
+cw <- 10 # µg/L
 
 
 # ------------------------------Constant Parameters (for all individuals) ----------------
@@ -106,8 +106,8 @@ px_max  <- 0.95        # maximum assimilation efficiency (-)
 ke_it <- 0.0016 * 24  # dominant rate constant for IT [h^-1] (Gergs et al. 2016)
 ke_sd <- 0.0029 * 24  # dominant rate constant for SD [h^-1] (Gergs et al. 2016)
 kk <- 0.0133 * 24     # h^-1 killig rate (SD) (from Gergs et al. 2016)
-z <- 0.2102           # ??g/L  threshold for effect (SD) (from Gergs et al. 2016)
-t_alpha <- 1.5614     # ??g/L median of threshold distribution (IT) (Gergs et al. 2016)
+z <- 0.2102           # µg/L  threshold for effect (SD) (from Gergs et al. 2016)
+t_alpha <- 1.5614     # µg/L median of threshold distribution (IT) (Gergs et al. 2016)
 t_beta <- 2.1420 * 24 # h^-1 shape parameter of threshold distribution (IT) (Gergs et al. 2016)
 
 # Crowding and Adaptation Parameters
