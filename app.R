@@ -24,7 +24,7 @@ ui <- fluidPage(
         tabPanel("Start",
                  br(),
                  numericInput("days", label = "Days simulated", value = 5, min = 1, max = 200, step = 1, width = "50%"),
-                 numericInput("temp", label = "Temperature [°C]", value = 20, min = 1, max = 50, step = 1, width = "50%"),
+                 numericInput("temp", label = "Temperature [??C]", value = 20, min = 1, max = 50, step = 1, width = "50%"),
                  br(),
                  h4("Monte Carlo Simulation"),
                  checkboxInput("mc.on", label = "activate Monte Carlo", value = FALSE),
@@ -67,7 +67,7 @@ ui <- fluidPage(
                  checkboxInput("tox.on", "Include toxic effects", value = FALSE),
                  radioButtons("tox.opt", label = "Toxicodynamic Model", 
                               choiceNames = c("Individual Tolerance", "Stochastic Death"), choiceValues = c(1,2)), 
-                 numericInput("cw", label = "Concentration of chlorpyrifos [µg/L]", value = 0, width = "50%"),
+                 numericInput("cw", label = "Concentration of chlorpyrifos [??g/L]", value = 0, width = "50%"),
   
                  # dynamic slider to fit the max value based on simulation days
                  uiOutput("tox.slider"),
@@ -525,7 +525,7 @@ server <- function(input, output, session) {
               b.UH[i] <- 0  # scaled maturity at egg formation
               R[i]  <- trunc(kr * UR[i] / u0e)  # calculation of brood size
               #if(R[i] < 0){R[i] <- 0}
-              UR[i] <- UR[i] - ((R[i] - u0e) / kr) # resets reproduction buffer but leaves rest of the buffer that could not be used to produce full egg
+              UR[i] <- UR[i] - ((R[i] * u0e) / kr) # resets reproduction buffer but leaves rest of the buffer that could not be used to produce full egg
               breeding[i] <- T
             }
             
@@ -708,7 +708,7 @@ server <- function(input, output, session) {
                 b.e[i] <- e[i]  # scaled reserve density of brood equals those of the mother at egg formation (different to DEB Theory)
                 b.UH[i] <- 0  # scaled maturity at egg formation
                 R[i]  <- trunc(kr * UR[i] / u0e)  # calculation of brood size
-                UR[i] <- UR[i] - ((R[i] - u0e) / kr) # resets reproduction buffer but leaves rest of the buffer that could not be used to produce full egg
+                UR[i] <- UR[i] - ((R[i] * u0e) / kr) # resets reproduction buffer but leaves rest of the buffer that could not be used to produce full egg
                 breeding[i] <- T
               }
             } # Reproduction if UH[i] >= uph
