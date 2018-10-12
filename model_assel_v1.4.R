@@ -32,7 +32,7 @@ temp.sc <- T
 # load temperature scenario
 temp.v <- read.csv("/Users/dino/Dropbox/Uni/Master/Masterarbeit/Daten/Temperatur/temp_mean.csv", header = TRUE, sep = ";", dec = ".")$mean_temp
 temp.v <- rep(temp.v, c(max(1, days/365))) 
-# set temperature (??C) for constant scenario
+# set temperature (°C) for constant scenario
 temp <- 20
 
 
@@ -130,9 +130,9 @@ px_max  <- kap_x       # maximum assimilation efficiency (-)
 # GUTS
 ke_sd   <- 0.0070211 * 24  # dominant rate constant for SD (h^-1 / d^-1)
 kk      <- 0.0105648 * 24  # killig rate for SD (h^-1 / d^-1)
-z       <- 0.1856509       # threshold for effect for SD (??g/L)
+z       <- 0.1856509       # threshold for effect for SD (µg/L)
 ke_it   <- 1.46e-07 * 24   # dominant rate constant for IT (h^-1 / d^-1) 
-t_alpha <- 5.71e-05        # median of threshold distribution for IT (??g/L)
+t_alpha <- 5.71e-05        # median of threshold distribution for IT (µg/L)
 t_beta  <- 2.34836595      # shape parameter of threshold distribution for IT (h^-1 / d^-1)
 L_par   <- 0.7             # physical body size of animals used in toxicity test for parameterisation (cm)
 
