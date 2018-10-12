@@ -92,7 +92,7 @@ tox.t.start <- 121
 # Exposure End (day)
 tox.t.end <- 124
 # concentration of chlorpyrifos in water
-cw <- 4 # ??g/L
+cw <- 4 # µg/L
 # load scenario
 tox.sc <- read.csv("/Users/dino/Dropbox/Uni/Master/Masterarbeit/Recovery_scenario/recovery_tox_scenario_5_single.csv", header = FALSE, sep = ";", dec = ".")$V1
 
