@@ -17,7 +17,7 @@ setwd("/Users/dino/Dropbox/Uni/Master/Masterarbeit/R_Masterarbeit/Results")
 # MC on / off
 mc.on <- T
 # Number of Monte Carlo Simulations
-mc.no <- 3
+mc.no <- 10
 
 
 # days to be simulated
@@ -32,7 +32,7 @@ temp.sc <- T
 # load temperature scenario
 temp.v <- read.csv("/Users/dino/Dropbox/Uni/Master/Masterarbeit/Daten/Temperatur/temp_mean.csv", header = TRUE, sep = ";", dec = ".")$mean_temp
 temp.v <- rep(temp.v, c(max(1, days/365))) 
-# set temperature (°C) for constant scenario
+# set temperature (??C) for constant scenario
 temp <- 20
 
 
@@ -92,7 +92,7 @@ tox.t.start <- 121
 # Exposure End (day)
 tox.t.end <- 124
 # concentration of chlorpyrifos in water
-cw <- 4 # µg/L
+cw <- 4 # ??g/L
 # load scenario
 tox.sc <- read.csv("/Users/dino/Dropbox/Uni/Master/Masterarbeit/Recovery_scenario/recovery_tox_scenario_5_single.csv", header = FALSE, sep = ";", dec = ".")$V1
 
@@ -130,9 +130,9 @@ px_max  <- kap_x       # maximum assimilation efficiency (-)
 # GUTS
 ke_sd   <- 0.0070211 * 24  # dominant rate constant for SD (h^-1 / d^-1)
 kk      <- 0.0105648 * 24  # killig rate for SD (h^-1 / d^-1)
-z       <- 0.1856509       # threshold for effect for SD (µg/L)
+z       <- 0.1856509       # threshold for effect for SD (??g/L)
 ke_it   <- 1.46e-07 * 24   # dominant rate constant for IT (h^-1 / d^-1) 
-t_alpha <- 5.71e-05        # median of threshold distribution for IT (µg/L)
+t_alpha <- 5.71e-05        # median of threshold distribution for IT (??g/L)
 t_beta  <- 2.34836595      # shape parameter of threshold distribution for IT (h^-1 / d^-1)
 L_par   <- 0.7             # physical body size of animals used in toxicity test for parameterisation (cm)
 
@@ -403,7 +403,7 @@ for (m in 1:mc.no) {
           b.UH[i] <- 0  # scaled maturity at egg formation
           R[i]  <- trunc(kr * UR[i] / u0e)  # calculation of brood size
           #if(R[i] < 0){R[i] <- 0}
-          UR[i] <- UR[i] - ((R[i] - u0e) / kr) # resets reproduction buffer but leaves rest of the buffer that could not be used to produce full egg
+          UR[i] <- UR[i] - ((R[i] * u0e) / kr) # resets reproduction buffer but leaves rest of the buffer that could not be used to produce full egg
           breeding[i] <- T
         }
         
@@ -605,7 +605,7 @@ for (m in 1:mc.no) {
             b.e[i] <- e[i]  # scaled reserve density of brood equals those of the mother at egg formation (different to DEB Theory)
             b.UH[i] <- 0  # scaled maturity at egg formation
             R[i]  <- trunc(kr * UR[i] / u0e)  # calculation of brood size
-            UR[i] <- UR[i] - ((R[i] - u0e) / kr) # resets reproduction buffer but leaves rest of the buffer that could not be used to produce full egg
+            UR[i] <- UR[i] - ((R[i] * u0e) / kr) # resets reproduction buffer but leaves rest of the buffer that could not be used to produce full egg
             breeding[i] <- T
           }
         } # Reproduction if UH[i] >= uph
