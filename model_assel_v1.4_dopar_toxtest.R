@@ -34,7 +34,7 @@ temp.sc <- F
 # load temperature scenario
 temp.v <- read.csv("/Users/dino/Dropbox/Uni/Master/Masterarbeit/Daten/Temperatur/temp_mean_oct.csv", header = TRUE, sep = ";", dec = ".")$mean_temp
 temp.v <- rep(temp.v, c(max(1, days/365))) # replicate data for each year to be simulated
-# set temperature (??C) for constant scenario
+# set temperature (°C) for constant scenario
 temp <- 20
 
 
@@ -100,7 +100,7 @@ tox.t.start <- 1
 # Exposure End (day)
 tox.t.end <- 4
 # concentration of chlorpyrifos in water
-cw_ini <- 8.25 # ??g/L
+cw_ini <- 8.25 # µg/L
 # load scenario
 tox.sc <- read.csv("/Users/dino/Dropbox/Uni/Master/Masterarbeit/Recovery_scenario/recovery_tox_scenario_0.7_single_d120.csv", header = FALSE, sep = ";", dec = ".")$V1
 
@@ -138,9 +138,9 @@ px_max  <- kap_x       # maximum assimilation efficiency (-)
 # GUTS
 ke_sd   <- 0.0256722063905976 * 24  # dominant rate constant for SD (h^-1)
 kk      <- 0.00401720387154429 * 24  # killig rate for SD (h^-1)
-z       <- 0.896533052524484       # threshold for effect for SD (??g/L)
+z       <- 0.896533052524484       # threshold for effect for SD (µg/L)
 ke_it   <- 0.00389824265489334 * 24   # dominant rate constant for IT (h^-1) 
-t_alpha <- 1.77409452103343        # median of threshold distribution for IT (??g/L)
+t_alpha <- 1.77409452103343        # median of threshold distribution for IT (µg/L)
 t_beta  <- 2.4718660201192      # shape parameter of threshold distribution for IT (h^-1)
 L_par   <- 0.7             # physical body size of animals used in toxicity test for parameterisation (cm)
 
